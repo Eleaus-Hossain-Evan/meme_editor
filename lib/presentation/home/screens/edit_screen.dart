@@ -31,10 +31,6 @@ class EditorScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('image editor demo'),
         actions: <Widget>[
-          // IconButton(
-          //   icon: const Icon(Icons.photo_library),
-          //   onPressed: _getImage,
-          // ),
           IconButton(
             icon: const Icon(Icons.done),
             onPressed: () {
@@ -45,10 +41,7 @@ class EditorScreen extends HookConsumerWidget {
       ),
       body: Column(children: <Widget>[
         Expanded(
-            child:
-                // _memoryImage != null
-                //     ?
-                ExtendedImage.network(
+            child: ExtendedImage.network(
           url,
           fit: BoxFit.contain,
           mode: ExtendedImageMode.editor,
@@ -65,29 +58,9 @@ class EditorScreen extends HookConsumerWidget {
             );
           },
           cacheRawData: true,
-        )
-            // : ExtendedImage.asset(
-            //     'assets/image.jpg',
-            //     fit: BoxFit.contain,
-            //     mode: ExtendedImageMode.editor,
-            //     enableLoadState: true,
-            //     extendedImageEditorKey: editorKey,
-            //     initEditorConfigHandler: (ExtendedImageState? state) {
-            //       return EditorConfig(
-            //         maxScale: 8.0,
-            //         cropRectPadding: const EdgeInsets.all(20.0),
-            //         hitTestSize: 20.0,
-            //         cropLayerPainter: _cropLayerPainter!,
-            //         initCropRectType: InitCropRectType.imageRect,
-            //         cropAspectRatio: _aspectRatio!.value,
-            //       );
-            //     },
-            //     cacheRawData: true,
-            //   ),
-            ),
+        )),
       ]),
       bottomNavigationBar: BottomAppBar(
-        //color: Colors.lightBlue,
         shape: const CircularNotchedRectangle(),
         child: ButtonTheme(
           minWidth: 0.0,
@@ -166,23 +139,17 @@ class EditorScreen extends HookConsumerWidget {
     try {
       _cropping = true;
 
-      //await showBusyingDialog();
-
       Uint8List? fileData;
-
-      /// native library
 
       fileData =
           await cropImageDataWithNativeLibrary(state: editorKey.currentState!);
 
       final String? filePath =
           await ImageSaver.save('extended_image_cropped_image.jpg', fileData!);
-      // var filePath = await ImagePickerSaver.saveFile(fileData: fileData);
 
       msg = 'save image : $filePath';
     } catch (e, stack) {
       msg = 'save failed: $e\n $stack';
-      print(msg);
     }
 
     ref.watch(routerProvider).pop();

@@ -2,13 +2,11 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:meme_editor/presentation/home/screens/edit_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../application/home/home_provider.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/widgets.dart';
 
 class ImageDetails extends HookConsumerWidget {
   const ImageDetails({super.key, required this.index});
@@ -43,7 +41,6 @@ class ImageDetails extends HookConsumerWidget {
                 memeDetails.url,
                 layoutInsets: padding20,
                 fit: BoxFit.contain,
-                //enableLoadState: false,
                 mode: ExtendedImageMode.gesture,
                 initGestureConfigHandler: (state) {
                   return GestureConfig(
@@ -60,22 +57,6 @@ class ImageDetails extends HookConsumerWidget {
                 },
               ),
             ),
-            // ExtendedImage.network(
-            //   memeDetails.url,
-            //   height: 500.h,
-            //   width: double.infinity,
-            //   fit: BoxFit.contain,
-            //   mode: ExtendedImageMode.editor,
-            //   //extendedImageEditorKey: ,
-            //   initEditorConfigHandler: (state) {
-            //     return EditorConfig(
-            //       maxScale: 8.0,
-            //       cropRectPadding: const EdgeInsets.all(20.0),
-            //       hitTestSize: 20.0,
-            //       cropAspectRatio: 1.8 / 2.7,
-            //     );
-            //   },
-            // ),
             gap10,
             Container(
               color: Colors.grey[200],
